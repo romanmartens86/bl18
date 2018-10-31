@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+
+    "u_admin": {
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 200",
+        ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
+      }
+    },
+
+    
+    "u_intern": {
+      "$uid": {
+        ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 50",
+        ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
+      }
+    }
+  }
+}

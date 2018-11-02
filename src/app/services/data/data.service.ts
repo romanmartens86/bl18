@@ -16,7 +16,7 @@ export class DataService {
   getUsers() {
     //return this.db.list('/u_intern/').take(1)
     //return this.db.list('/u_intern/');
-    var testVar = this.db.object('/u_intern/').take(1);
+    //var testVar = this.db.object('/u_intern/').take(1);
     
     
     console.log()

@@ -23,7 +23,7 @@ import { UserListSingleComponent } from './components/user-list-single/user-list
 import { UserOwnComponent } from './components/user-own/user-own.component';
 import { RegisterComponent } from './components/_user-login/register/register.component';
 
-import { environment } from './../environments/environment';
+import { environment } from './../environments_private/environment';
 import { AuthGuard } from './guards/auth.guard';
 import { UserService } from './services/user/user.service';
 import { AuthService } from './services/auth/auth.service';

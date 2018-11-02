@@ -2,8 +2,7 @@
 
 
 # Firebase Private Project Data
-/src/environments/environment.ts
-/src/environments/environment.prod.ts
+/src/environments_private
 
 
 # compiled output

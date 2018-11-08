@@ -11,7 +11,7 @@
 /out-tsc
 /functions/lib
 /.firebase
-
+/functions/firebase-debug.log
 
 # dependencies
 /node_modules

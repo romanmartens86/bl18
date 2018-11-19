@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import 'rxjs/operators';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/take';
+//import 'rxjs/add/operator/take';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public loadedData: any;
+
+  public allUsers$: AngularFireList<Text>;
+
+
   db: AngularFireDatabase
   constructor() {  }
 
@@ -17,9 +20,8 @@ export class DataService {
     //return this.db.list('/u_intern/').take(1)
     //return this.db.list('/u_intern/');
     //var testVar = this.db.object('/u_intern/').take(1);
-    
-    
-    console.log()
+    var testVar = this.db.object('/u_intern/')
+    console.log(testVar);
   }
   
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'bl18-user-own',
@@ -15,6 +16,7 @@ export class UserOwnComponent implements OnInit {
     error: boolean = false;
 
   constructor(private authServ: AuthService,
+              private dataServ: DataService,
               private router: Router) { }
 
   ngOnInit() {
@@ -28,6 +30,11 @@ export class UserOwnComponent implements OnInit {
       this.errorMessage = err.message;
       this.error = true;
     })
+  }
+
+
+  tryGetUsers(){
+    this.dataServ.getUsers();
   }
 
 }

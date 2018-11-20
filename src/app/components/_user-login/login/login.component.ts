@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material';
+
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
@@ -28,7 +30,8 @@ export class LoginComponent implements OnInit {
   constructor(private authServ: AuthService,
             private formBuilder: FormBuilder,
             private router: Router,
-            private actRoute: ActivatedRoute) { }
+            private actRoute: ActivatedRoute,
+            private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -62,6 +65,7 @@ export class LoginComponent implements OnInit {
   tryGoogleLogin(){
     this.authServ.doGoogleLogin().then(res => {
       this.router.navigate([this.redirectPage]);
+      this.snackBar.open('Login erfolgreich!', '', {duration:2000,})
     }, err => {
       this.errorMessage = err.message;
       this.error = true;
@@ -71,6 +75,7 @@ export class LoginComponent implements OnInit {
   tryTwitterLogin(){
     this.authServ.doTwitterLogin().then(res => {
       this.router.navigate([this.redirectPage]);
+      this.snackBar.open('Login erfolgreich!', '', {duration:2000,})
     }, err => {
       this.errorMessage = err.message;
       this.error = true;
@@ -80,6 +85,7 @@ export class LoginComponent implements OnInit {
   tryFacebookLogin(){
     this.authServ.doFacebookLogin().then(res => {
       this.router.navigate([this.redirectPage]);
+      this.snackBar.open('Login erfolgreich!', '', {duration:2000,})
     }, err => {
       this.errorMessage = err.message;
       this.error = true;
@@ -91,6 +97,7 @@ export class LoginComponent implements OnInit {
 
     this.authServ.doLogin(value).then(res => {
       this.router.navigate([this.redirectPage]);
+      this.snackBar.open('Login erfolgreich!', '', {duration:2000,})
     }, err => {
       this.errorMessage = err.message;
       this.error = true;

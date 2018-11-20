@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { MatSnackBar } from '@angular/material'
+
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DataService } from 'src/app/services/data/data.service';
 
@@ -17,7 +19,8 @@ export class UserOwnComponent implements OnInit {
 
   constructor(private authServ: AuthService,
               private dataServ: DataService,
-              private router: Router) { }
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -26,6 +29,7 @@ export class UserOwnComponent implements OnInit {
   doLogout() {
     this.authServ.doLogout().then(res => {
       this.router.navigate(['/home']);
+      this.snackBar.open('Logout erfolgreich!', '', {duration:2000,})
     }, err => {
       this.errorMessage = err.message;
       this.error = true;
@@ -36,5 +40,7 @@ export class UserOwnComponent implements OnInit {
   tryGetUsers(){
     this.dataServ.getUsers();
   }
+
+
 
 }

@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { MaterialModules } from './app.material';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -29,6 +30,7 @@ import { UserService } from './services/user/user.service';
 import { AuthService } from './services/auth/auth.service';
 import { ResetPasswordComponent } from './components/_user-login/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './components/_user-login/forgot-password/forgot-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { ForgotPasswordComponent } from './components/_user-login/forgot-passwor
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModules,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthGuard,

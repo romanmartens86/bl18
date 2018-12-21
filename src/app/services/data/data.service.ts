@@ -10,18 +10,23 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-  public allUsers$: AngularFireList<Text>;
+  public allUsers$: AngularFireList<any[]>;
 
+  
 
-  db: AngularFireDatabase
-  constructor() {  }
+  constructor(public db: AngularFireDatabase) {  }
 
   getUsers() {
     //return this.db.list('/u_intern/').take(1)
     //return this.db.list('/u_intern/');
     //var testVar = this.db.object('/u_intern/').take(1);
-    var testVar = this.db.object('/u_intern/')
-    console.log(testVar);
+    //var testVar = this.db.object('/u_intern/')
+    //console.log(testVar);
+    //this.allUsers$ = this.db.list('/u_intern');
+    //console.log(this.allUsers$.valueChanges()
+    //return this.allUsers$.valueChanges();
+    //this.allUsers$ = this.db.list('/u_intern').query.once("value");
+    return this.db.list('/u_intern').query.once("value");
   }
   
 

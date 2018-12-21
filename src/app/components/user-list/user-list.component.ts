@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'bl18-user-list',
@@ -7,9 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  errorMessage: string = "StartValue..";
+  error: boolean = false;
+
+  users: any[];
+  
+  constructor(private dataServ: DataService) { }
 
   ngOnInit() {
   }
 
+
+  tryGetUsers(){
+    this.dataServ.getUsers().then(res => {
+      this.users = res.val();
+      console.log(this.users);
+
+      for (let key of Object.keys(this.users)) {  
+        let User = this.users[key];
+        // ... do something with mealName
+        console.log(User);
+      }
+      // this.users.forEach(element => {
+      //   console.log(element.name);
+      // });
+
+    }, err => {
+      this.errorMessage = err.message;
+      this.error = true
+    })
+  }
+
 }
+

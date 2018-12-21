@@ -1,3 +1,19 @@
-<p>
-  user-list works!
-</p>
+<div class="container">
+  <p>
+    user-list works!
+  </p>
+  
+  <button (click)="tryGetUsers()" type="button" class="btn unique-color btn-block">
+    Get Users
+  </button>
+
+  <ul>
+    <li *ngFor="let user of Users">
+      {{ user.name }}
+    </li>
+  </ul>
+
+</div>
+
+
+

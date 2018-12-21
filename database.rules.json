@@ -1,8 +1,5 @@
 {
   "rules": {
-    ".read": false,
-    ".write": false,
-
 
     "u_admin": {
       "$uid": {
@@ -13,10 +10,10 @@
 
     
     "u_intern": {
-      "$uid": {
         ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 50",
-        ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
-      }
+        "$uid":{
+          ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
+        }
     }
   }
 }

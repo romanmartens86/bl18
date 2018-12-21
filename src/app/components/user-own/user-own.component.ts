@@ -17,6 +17,8 @@ export class UserOwnComponent implements OnInit {
     errorMessage: string = "StartValue..";
     error: boolean = false;
 
+    users: any;
+
   constructor(private authServ: AuthService,
               private dataServ: DataService,
               private router: Router,
@@ -37,8 +39,15 @@ export class UserOwnComponent implements OnInit {
   }
 
 
+
   tryGetUsers(){
-    this.dataServ.getUsers();
+    this.dataServ.getUsers().then(res => {
+      this.users = res.val();
+      console.log(this.users);
+    }, err => {
+      this.errorMessage = err.message;
+      this.error = true
+    })
   }
 
 

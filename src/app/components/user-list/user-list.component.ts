@@ -19,19 +19,23 @@ export class UserListComponent implements OnInit {
   }
 
 
+
+
+  
   tryGetUsers(){
     this.dataServ.getUsers().then(res => {
       this.users = res.val();
+
+      // log whole object containing all users to console...
       console.log(this.users);
 
       for (let key of Object.keys(this.users)) {  
         let User = this.users[key];
-        // ... do something with mealName
+
+        // will only log a single user to console...
         console.log(User);
       }
-      // this.users.forEach(element => {
-      //   console.log(element.name);
-      // });
+
 
     }, err => {
       this.errorMessage = err.message;

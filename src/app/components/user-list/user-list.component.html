@@ -11,14 +11,9 @@
     <li>
       Roman Martens
     </li>
-    <li *ngFor="let user of Users">
+    <li *ngFor="let user of users">
       {{ user.name }}
     </li>
-  </ul>
-
-  <ul>
-    <li>Tests</li>
-    <li *ngFor="let elem of testUsers; let i = index"> {{i}}. {{elem.name}}</li>
   </ul>
 
 </div>

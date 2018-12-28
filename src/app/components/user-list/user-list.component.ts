@@ -18,24 +18,6 @@ export class UserListComponent implements OnInit {
   users: Array<any> = [];
   unsortedUsers: any;
 
-  testUsers = [
-    {
-      name: "roman"
-    },
-    {
-      name: "Elvis"
-    },
-    {
-      name: "Moon"
-    },
-    {
-      name: "Moon"
-    },
-    {
-      name: "Sun"
-    }
-  ]
-
   constructor(private dataServ: DataService) {  }
 
   ngOnInit() {  }

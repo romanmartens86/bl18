@@ -37,19 +37,4 @@ export class UserOwnComponent implements OnInit {
       this.error = true;
     })
   }
-
-
-
-  tryGetUsers(){
-    this.dataServ.getUsers().then(res => {
-      this.users = res.val();
-      console.log(this.users);
-    }, err => {
-      this.errorMessage = err.message;
-      this.error = true
-    })
-  }
-
-
-
 }

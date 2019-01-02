@@ -16,11 +16,12 @@ export class UserListComponent implements OnInit {
   //users: any[];
   users: Array<any> = [];
 
-  constructor(private dataServ: DataService) { 
-    this.getUsers();
-   }
+  constructor(private dataServ: DataService) { }
 
-  ngOnInit() {  }
+
+  ngOnInit() {
+    this.getUsers();
+  }
 
   tryGetUsers(){
     console.log(this.users);

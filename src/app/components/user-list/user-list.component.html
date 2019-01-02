@@ -1,17 +1,19 @@
-<div class="container">
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let user of users">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{ user.name }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p>
-        {{ user.ID }}
-      </p>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let user of users">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ user.name }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-action-list>
+      <button mat-list-item *ngFor="let item of users">{{ item.name }}</button>
+    </mat-action-list>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
 
 
 

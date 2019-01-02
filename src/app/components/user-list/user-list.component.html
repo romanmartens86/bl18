@@ -1,18 +1,16 @@
 <div class="container">
-  <p>
-    user-list works!
-  </p>
-  
-  <button (click)="tryGetUsers()" type="button" class="btn unique-color btn-block">
-    Get Users
-  </button>
-
-  <ul>
-    <li *ngFor="let user of users">
-      {{ user.name }}
-    </li>
-  </ul>
-
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let user of users">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ user.name }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        {{ user.ID }}
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>
 
 

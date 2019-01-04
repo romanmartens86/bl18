@@ -27,6 +27,11 @@ export class UserListComponent implements OnInit {
     this.users = this.dataServ.getUsers();
     console.log(this.users);
   }
+  
+  SingleUser(index: number){
+    console.log(this.users[index].name);
+    return this.users[index];
+  }
 
 }
 

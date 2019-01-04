@@ -1,6 +1,6 @@
 
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let user of users">
+  <mat-expansion-panel *ngFor="let user of users; let i = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
             <img class="rounded float-left" src="{{user.photoURL}}" height="50" alt="">
@@ -8,9 +8,10 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <mat-action-list>
-      <button mat-list-item *ngFor="let item of users">{{ item.name }}</button>
-    </mat-action-list>
+
+    <ng-template matExpansionPanelContent>
+      {{ SingleUser(i).name }}
+    </ng-template>
 
   </mat-expansion-panel>
 </mat-accordion>

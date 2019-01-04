@@ -23,11 +23,9 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
 
-  tryGetUsers(){
-    console.log(this.users);
-  }
   getUsers() {
     this.users = this.dataServ.getUsers();
+    console.log(this.users);
   }
 
 }

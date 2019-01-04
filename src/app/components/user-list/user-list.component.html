@@ -3,7 +3,8 @@
   <mat-expansion-panel *ngFor="let user of users">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ user.name }}
+            <img class="rounded float-left" src="{{user.photoURL}}" height="50" alt="">
+            <p>{{ user.name }}</p>
       </mat-panel-title>
     </mat-expansion-panel-header>
 

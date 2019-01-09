@@ -25,13 +25,13 @@ export class UserListComponent implements OnInit {
 
   getUsers() {
     this.users = this.dataServ.getUsers();
-    console.log(this.users);
-  }
-  
-  SingleUser(index: number){
-    console.log(this.users[index].name);
-    return this.users[index];
   }
 
+  GetSingleUser(index: number) {
+    if (typeof this.users[index].u_admin === 'undefined') {
+      this.dataServ.getUser(this.users[index].ID);
+      this.getUsers();
+    }
+  }
 }
 

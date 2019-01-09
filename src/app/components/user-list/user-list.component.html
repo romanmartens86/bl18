@@ -1,21 +1,20 @@
-
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let user of users; let i = index">
+  <mat-expansion-panel *ngFor="let user of users; let i = index" (click)="GetSingleUser(i)">
     <mat-expansion-panel-header>
       <mat-panel-title>
-            <img class="rounded float-left" src="{{user.photoURL}}" height="50" alt="">
-            <p>{{ user.name }}</p>
+        <img class="rounded float-left" src="{{user.photoURL}}" height="50" alt="">
+        <p>{{ user.name }}</p>
       </mat-panel-title>
     </mat-expansion-panel-header>
 
 
     <ng-template matExpansionPanelContent>
-      {{ SingleUser(i).name }}
+      {{ user.ID }}
+
+      <div *ngIf="user.u_admin">
+        {{ user.u_admin.email }}
+      </div>
     </ng-template>
 
   </mat-expansion-panel>
 </mat-accordion>
-
-
-
-

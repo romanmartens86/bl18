@@ -27,8 +27,10 @@ export const createUserData = functions.auth.user().onCreate((user) =>
 	
 	//  user data internal list -> for data that should be open for church members
 	admin.database().ref('/u_intern/' + user.uid)
-    .set({name: user.displayName,
-      photoURL: user.photoURL});
+    .set({
+		UID: user.uid,
+		name: user.displayName,
+      	photoURL: user.photoURL});
   });
 
   // on deletion of user -> all saved data has to be removed

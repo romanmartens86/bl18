@@ -10,8 +10,9 @@
 
     
     "u_intern": {
-        ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 50",
+      ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 50",
         "$uid":{
+          ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 50",
           ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
         }
     }

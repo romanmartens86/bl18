@@ -44,11 +44,11 @@ export const createUserData = functions.auth.user().onCreate((user) =>
   });
 
 
+  
   // on deletion of user -> all saved data has to be removed
   // because of European DataProtection Laws
   export const deleteUserData = functions.auth.user().onDelete((user) =>
   { // get firebase user
-
 
 	// user data administrative list -> for data that should not be seen by everyone
 	admin.database().ref('/u_admin/' + user.uid)
@@ -62,5 +62,4 @@ export const createUserData = functions.auth.user().onCreate((user) =>
 	admin.database().ref('/u_new/' + user.uid)
 		.remove();
 	
-
   });

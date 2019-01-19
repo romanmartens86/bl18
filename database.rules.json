@@ -1,20 +1,24 @@
 {
   "rules": {
-
     "u_admin": {
       "$uid": {
         ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 200",
         ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
       }
     },
-
-    
     "u_intern": {
       ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 50",
-        "$uid":{
-          ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 50",
-          ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
-        }
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 50",
+        ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
+      }
+    },
+    "u_new": {
+      ".read": "root.child('u_admin').child(auth.uid).child('level').val() >= 200",
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('u_admin').child(auth.uid).child('level').val() >= 200",
+        ".write": "root.child('u_admin').child(auth.uid).child('level').val() >= 200"
+      }
     }
   }
 }

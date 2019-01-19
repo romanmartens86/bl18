@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import 'rxjs/operators';
+import { UserOwnComponent } from 'src/app/components/user-own/user-own.component';
 
 
 @Injectable({
@@ -11,43 +12,85 @@ import 'rxjs/operators';
 export class DataService {
 
   //private allUsers$: AngularFireList<any[]>;
-  private allUsersUnsorted: any;
+  private internUsersUnsorted: any;
+  private newUsersUnsorted: any;
 
-  public allUsersArr: Array<any> = [];
+  public internUsersArr: Array<any> = [];
+  public newUsersArr: Array<any> = [];
+
+  public UserOwn: any;
+
 
   constructor(public db: AngularFireDatabase) {
-    this.downloadUsers();
+    this.downloadInternUsers();
+    this.downloadNewUsers();
+    console.log("intern Users: " + this.internUsersUnsorted);
+    console.log("new Users: " + this.newUsersUnsorted);
   }
 
+  getUserOwn() {
 
-  downloadUsers() {
+    return this.UserOwn;
+  }
+
+  downloadInternUsers() {
     this.db.list('/u_intern').query.once("value").then(res => {
-      this.allUsersUnsorted = res.val();
+      this.internUsersUnsorted = res.val();
 
-      for (let key of Object.keys(this.allUsersUnsorted)) {
-        let User = this.allUsersUnsorted[key];
+      for (let key of Object.keys(this.internUsersUnsorted)) {
+        let User = this.internUsersUnsorted[key];
 
         // to not lose the ID
         User.ID = key;
 
         // add user to array of users
-        this.allUsersArr.push(User);
+        this.internUsersArr.push(User);
       }
     }, err => {
       console.log("Error on downloading UserList" + err.message);
     })
   }
 
-  getUsers() {
-    return this.allUsersArr;
+  getInternUsers() {
+    return this.internUsersArr;
   }
+
+
+
 
   getUser(ID: string) {
     this.db.object('/u_admin/' + ID).query.once("value").then(res => {
-      this.allUsersArr.find(x => x.ID == ID).u_admin = res.val();
+      this.internUsersArr.find(x => x.ID == ID).u_admin = res.val();
     }, err => {
       console.log("Error on downloading User" + err.message);
     })
+  }
+
+
+
+
+
+
+  downloadNewUsers() {
+    this.db.list('/u_new').query.once("value").then(res => {
+      this.newUsersUnsorted = res.val();
+
+      for (let key of Object.keys(this.newUsersUnsorted)) {
+        let User = this.newUsersUnsorted[key];
+
+        // to not lose the ID
+        User.ID = key;
+
+        // add user to array of users
+        this.internUsersArr.push(User);
+      }
+    }, err => {
+      console.log("Error on downloading UserList" + err.message);
+    })
+  }
+
+  getNewUsers() {
+    return this.newUsersArr;
   }
 
 }

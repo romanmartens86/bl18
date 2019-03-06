@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data/data.service';
+import { DataService, bl18user } from 'src/app/services/data/data.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'bl18-user-list',
@@ -14,8 +15,8 @@ export class UserListComponent implements OnInit {
   error: boolean = false;
 
   //users: any[];
-  users: Array<any> = [];
-  newUsers: Array<any> = [];
+  users: Array<bl18user> = [];
+  newUsers: Observable<bl18user[]>;
 
   constructor(private dataServ: DataService) { }
 
@@ -34,10 +35,10 @@ export class UserListComponent implements OnInit {
   }
 
   GetSingleUser(index: number) {
-    if (typeof this.users[index].u_admin === 'undefined') {
-      this.dataServ.getUser(this.users[index].ID);
-      this.getUsers();
-    }
+    //if (typeof this.users[index].u_admin === 'undefined') {
+    //  this.dataServ.getUser(this.users[index].ID);
+    //  this.getUsers();
+    //}
   }
 }
 

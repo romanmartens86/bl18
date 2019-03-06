@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+
 import 'rxjs/operators';
-import { UserOwnComponent } from 'src/app/components/user-own/user-own.component';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -13,19 +14,17 @@ export class DataService {
 
   //private allUsers$: AngularFireList<any[]>;
   private internUsersUnsorted: any;
-  private newUsersUnsorted: any;
+  //private newUsersUnsorted: any;
 
-  public internUsersArr: Array<any> = [];
-  public newUsersArr: Array<any> = [];
+  public internUsersArr: Array<bl18user> = [];
+  public newUsersArr: Array<bl18user> = [];
 
-  public UserOwn: any;
+  public UserOwn: bl18user;
 
 
   constructor(public db: AngularFireDatabase) {
     this.downloadInternUsers();
     this.downloadNewUsers();
-    console.log("intern Users: " + this.internUsersUnsorted);
-    console.log("new Users: " + this.newUsersUnsorted);
   }
 
   getUserOwn() {
@@ -41,7 +40,7 @@ export class DataService {
         let User = this.internUsersUnsorted[key];
 
         // to not lose the ID
-        User.ID = key;
+        //User.ID = key;
 
         // add user to array of users
         this.internUsersArr.push(User);
@@ -60,37 +59,45 @@ export class DataService {
 
   getUser(ID: string) {
     this.db.object('/u_admin/' + ID).query.once("value").then(res => {
-      this.internUsersArr.find(x => x.ID == ID).u_admin = res.val();
+      this.internUsersArr.push = res.val();
     }, err => {
       console.log("Error on downloading User" + err.message);
     })
   }
 
 
-
-
-
-
   downloadNewUsers() {
     this.db.list('/u_new').query.once("value").then(res => {
-      this.newUsersUnsorted = res.val();
+      let newUsersUnsorted = res.val();
 
-      for (let key of Object.keys(this.newUsersUnsorted)) {
-        let User = this.newUsersUnsorted[key];
+      for (let key of Object.keys(newUsersUnsorted)) {
 
-        // to not lose the ID
-        User.ID = key;
+        // get data Object into bl18user-class-format
+        let UserClass: bl18user = {
+          UID: newUsersUnsorted[key].UID,
+          name: newUsersUnsorted[key].name,
+          photoURL: newUsersUnsorted[key].photoURL
+        }
 
-        // add user to array of users
-        this.internUsersArr.push(User);
+        // add bl18user to array of bl18users
+        this.newUsersArr.push(UserClass);
       }
+
     }, err => {
       console.log("Error on downloading UserList" + err.message);
     })
   }
 
-  getNewUsers() {
-    return this.newUsersArr;
+
+  getNewUsers(): Observable<bl18user[]> {
+    return of(this.newUsersArr);
   }
 
+}
+
+
+export class bl18user {
+  UID: string;
+  name: string;
+  photoURL: string
 }

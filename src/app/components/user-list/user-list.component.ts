@@ -16,7 +16,8 @@ export class UserListComponent implements OnInit {
 
   //users: any[];
   users: Array<bl18user> = [];
-  newUsers: Observable<bl18user[]>;
+  //newUsers: Observable<bl18user[]>;
+  newUsers: bl18user[];
 
   constructor(private dataServ: DataService) { }
 
@@ -30,8 +31,11 @@ export class UserListComponent implements OnInit {
     this.users = this.dataServ.getInternUsers();
   }
 
-  getNewUsers() {
-    this.newUsers = this.dataServ.getNewUsers();
+  getNewUsers(): void {
+    this.dataServ.getNewUsers()
+      .subscribe(newUsers => this.newUsers = newUsers)
+
+    //this.newUsers = this.dataServ.getNewUsers();
   }
 
   GetSingleUser(index: number) {

@@ -1,4 +1,4 @@
-<div class="container" *ngIf="users[0].UID">
+<div class="container" *ngIf="users">
   <H2>Intern Users</H2>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let user of users; let i = index" (click)="GetSingleUser(i)">
@@ -24,7 +24,7 @@
 
 
 
-<div class="container" *ngIf="newUsers[0].UID">
+<div class="container" *ngIf="newUsers">
   <H2>New Users</H2>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let user of newUsers; let i = index" (click)="GetSingleUser(i)">

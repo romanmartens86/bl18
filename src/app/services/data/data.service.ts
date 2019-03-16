@@ -12,14 +12,10 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 
 export class DataService {
 
-  //private allUsers$: AngularFireList<any[]>;
-  private internUsersUnsorted: any;
-  //private newUsersUnsorted: any;
+  private internUsersArr: Array<bl18user> = [];
+  private newUsersArr: Array<bl18user> = [];
 
-  public internUsersArr: Array<bl18user> = [];
-  public newUsersArr: Array<bl18user> = [];
-
-  public UserOwn: bl18user;
+  private adminDataUsersArray: Array<bl18userAdminData> = [];
 
 
   constructor(public db: AngularFireDatabase) {
@@ -27,44 +23,26 @@ export class DataService {
     this.downloadNewUsers();
   }
 
-  getUserOwn() {
-
-    return this.UserOwn;
-  }
-
   downloadInternUsers() {
     this.db.list('/u_intern').query.once("value").then(res => {
-      this.internUsersUnsorted = res.val();
+      let internUsersUnsorted = res.val();
 
-      //for (let key of Object.keys(this.internUsersUnsorted)) {
-      //let User = this.internUsersUnsorted[key];
+      for (let key of Object.keys(internUsersUnsorted)) {
 
-      // to not lose the ID
-      //User.ID = key;
+        // get data Object into bl18user-class-format
+        let UserClass: bl18user = {
+          UID: internUsersUnsorted[key].UID,
+          name: internUsersUnsorted[key].name,
+          photoURL: internUsersUnsorted[key].photoURL
+        }
 
-      // add user to array of users
-      //this.internUsersArr.push(User);
-      //}
+        // add bl18user to array of bl18users
+        this.internUsersArr.push(UserClass);
+      }
     }, err => {
       console.log("Error on downloading UserList" + err.message);
     })
   }
-
-  getInternUsers() {
-    return this.internUsersArr;
-  }
-
-
-
-
-  getUser(ID: string) {
-    this.db.object('/u_admin/' + ID).query.once("value").then(res => {
-      this.internUsersArr.push = res.val();
-    }, err => {
-      console.log("Error on downloading User" + err.message);
-    })
-  }
-
 
   downloadNewUsers() {
     this.db.list('/u_new').query.once("value").then(res => {
@@ -82,17 +60,40 @@ export class DataService {
         // add bl18user to array of bl18users
         this.newUsersArr.push(UserClass);
       }
-
     }, err => {
       console.log("Error on downloading UserList" + err.message);
     })
   }
 
 
+  downloadUserAdminData(ID: string) {
+    this.db.object('/u_admin/' + ID).query.once("value").then(res => {
+      let returnVal = res.val();
+      let UserAdminData: bl18userAdminData = {
+        UID: returnVal.UID,
+        email: returnVal.email,
+        level: returnVal.level,
+        u_list: returnVal.u_list
+      }
+      this.adminDataUsersArray.push(UserAdminData);
+
+    }, err => {
+      console.log("Error on downloading UserAdminData for User with id: " + ID + " errorMsg: " + err.message);
+    })
+  }
+
+
+  getInternUsers(): Observable<bl18user[]> {
+    return of(this.internUsersArr);
+  }
+
   getNewUsers(): Observable<bl18user[]> {
     return of(this.newUsersArr);
   }
 
+  getUserAdminData(): Observable<bl18userAdminData[]> {
+    return of(this.adminDataUsersArray);
+  }
 }
 
 
@@ -100,4 +101,11 @@ export class bl18user {
   UID: string;
   name: string;
   photoURL: string
+}
+
+export class bl18userAdminData {
+  UID: string;
+  email: string;
+  level: number;
+  u_list: string
 }

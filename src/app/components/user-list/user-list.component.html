@@ -1,4 +1,4 @@
-<div class="container" *ngIf="users">
+<div class="container" *ngIf="users[0]">
   <H2>Intern Users</H2>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let user of users; let i = index" (click)="GetSingleUser(i)">
@@ -11,10 +11,10 @@
 
 
       <ng-template matExpansionPanelContent>
-        {{ user.ID }}
+        {{ user.UID }}
 
         <div *ngIf="user.u_admin">
-          {{ user.u_admin.email }}
+          {{ selectedAdminUserData.email }}
         </div>
       </ng-template>
 
@@ -27,7 +27,7 @@
 <div class="container" *ngIf="newUsers">
   <H2>New Users</H2>
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let user of newUsers; let i = index" (click)="GetSingleUser(i)">
+    <mat-expansion-panel *ngFor="let user of newUsers; let i = index" (click)="GetSingleUser(user.UID)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <img class="rounded float-left" src="{{user.photoURL}}" height="50" alt="">
@@ -37,10 +37,10 @@
 
 
       <ng-template matExpansionPanelContent>
-        {{ user.ID }}
+        {{ user.UID }}
 
-        <div *ngIf="user.u_admin">
-          {{ user.u_admin.email }}
+        <div *ngIf="selectedAdminUserData">
+          {{ selectedAdminUserData.email }}
         </div>
       </ng-template>
 

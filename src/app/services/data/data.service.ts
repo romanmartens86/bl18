@@ -27,17 +27,19 @@ export class DataService {
     this.db.list('/u_intern').query.once("value").then(res => {
       let internUsersUnsorted = res.val();
 
-      for (let key of Object.keys(internUsersUnsorted)) {
+      // if Data has been downloaded - go through the downloaded users
+      if (internUsersUnsorted) {
+        for (let key of Object.keys(internUsersUnsorted)) {
+          // get data Object into bl18user-class-format
+          let UserClass: bl18user = {
+            UID: internUsersUnsorted[key].UID,
+            name: internUsersUnsorted[key].name,
+            photoURL: internUsersUnsorted[key].photoURL
+          }
 
-        // get data Object into bl18user-class-format
-        let UserClass: bl18user = {
-          UID: internUsersUnsorted[key].UID,
-          name: internUsersUnsorted[key].name,
-          photoURL: internUsersUnsorted[key].photoURL
+          // add bl18user to array of bl18users
+          this.internUsersArr.push(UserClass);
         }
-
-        // add bl18user to array of bl18users
-        this.internUsersArr.push(UserClass);
       }
     }, err => {
       console.log("Error on downloading UserList" + err.message);
@@ -48,17 +50,18 @@ export class DataService {
     this.db.list('/u_new').query.once("value").then(res => {
       let newUsersUnsorted = res.val();
 
-      for (let key of Object.keys(newUsersUnsorted)) {
-
-        // get data Object into bl18user-class-format
-        let UserClass: bl18user = {
-          UID: newUsersUnsorted[key].UID,
-          name: newUsersUnsorted[key].name,
-          photoURL: newUsersUnsorted[key].photoURL
+      // if Data has been downloaded - go through the downloaded users
+      if (newUsersUnsorted) {
+        for (let key of Object.keys(newUsersUnsorted)) {
+          // get data Object into bl18user-class-format
+          let UserClass: bl18user = {
+            UID: newUsersUnsorted[key].UID,
+            name: newUsersUnsorted[key].name,
+            photoURL: newUsersUnsorted[key].photoURL
+          }
+          // add bl18user to array of bl18users
+          this.newUsersArr.push(UserClass);
         }
-
-        // add bl18user to array of bl18users
-        this.newUsersArr.push(UserClass);
       }
     }, err => {
       console.log("Error on downloading UserList" + err.message);

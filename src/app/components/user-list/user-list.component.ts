@@ -48,19 +48,31 @@ export class UserListComponent implements OnInit {
     this.dataServ.getUserAdminData()
       .subscribe(adminData => {
         this.adminUserData = adminData;
-        this.selectedAdminUserData = this.adminUserData.find(o => o.UID === this.selectedAdminUserUID)
+        //this.selectedAdminUserData = this.adminUserData.find(o => o.UID === this.selectedAdminUserUID)
       })
   }
 
   GetSingleUser(uid: string) {
     this.selectedAdminUserUID = uid;
+    this.selectedAdminUserData = null;
+
     if (!this.adminUserData) {
-      this.dataServ.downloadUserAdminData(uid);
+      this.dataServ.downloadUserAdminData(uid)
+        .then(res => {
+          this.selectedAdminUserData = res;
+        }, err => {
+          console.log(err);
+        });
     } else {
       this.selectedAdminUserData = this.adminUserData.find(o => o.UID === uid)
 
       if (!this.selectedAdminUserData) {
-        this.dataServ.downloadUserAdminData(uid);
+        this.dataServ.downloadUserAdminData(uid)
+          .then(res => {
+            this.selectedAdminUserData = res;
+          }, err => {
+            console.log(err);
+          });
       }
     }
   }

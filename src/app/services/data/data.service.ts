@@ -6,6 +6,7 @@ import 'rxjs/operators';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -69,20 +70,26 @@ export class DataService {
   }
 
 
-  downloadUserAdminData(ID: string) {
-    this.db.object('/u_admin/' + ID).query.once("value").then(res => {
-      let returnVal = res.val();
-      let UserAdminData: bl18userAdminData = {
-        UID: returnVal.UID,
-        email: returnVal.email,
-        level: returnVal.level,
-        u_list: returnVal.u_list
-      }
-      this.adminDataUsersArray.push(UserAdminData);
+  downloadUserAdminData(ID: string): Promise<bl18userAdminData> {
+    return new Promise<bl18userAdminData>((resolve, reject) => {
+      this.db.object('/u_admin/' + ID).query.once("value").then(res => {
+        let returnVal = res.val();
+        let UserAdminData: bl18userAdminData = {
+          UID: returnVal.UID,
+          email: returnVal.email,
+          level: returnVal.level,
+          u_list: returnVal.u_list
+        }
+        this.adminDataUsersArray.push(UserAdminData);
+        resolve(UserAdminData);
 
-    }, err => {
-      console.log("Error on downloading UserAdminData for User with id: " + ID + " errorMsg: " + err.message);
+      }, err => {
+        console.log("Error on downloading UserAdminData for User with id: " + ID + " errorMsg: " + err.message);
+        reject(err);
+
+      })
     })
+
   }
 
 

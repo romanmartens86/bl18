@@ -11,8 +11,6 @@
 
 
       <ng-template matExpansionPanelContent>
-        {{ user.UID }}
-
         <div *ngIf="user.u_admin">
           {{ selectedAdminUserData.email }}
         </div>
@@ -37,10 +35,13 @@
 
 
       <ng-template matExpansionPanelContent>
-        {{ user.UID }}
-
-        <div *ngIf="selectedAdminUserData">
+        <div *ngIf="selectedAdminUserData.UID === user.UID">
           {{ selectedAdminUserData.email }}
+          {{ selectedAdminUserData.level }}
+          {{ selectedAdminUserData.u_list }}
+        </div>
+        <div *ngIf="selectedAdminUserData==null">
+          <p>loading...</p>
         </div>
       </ng-template>
 

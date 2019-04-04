@@ -19,7 +19,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/_user-login/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { UserSingleComponent } from './components/user-single/user-single.component';
 import { UserListSingleComponent } from './components/user-list-single/user-list-single.component';
 import { UserOwnComponent } from './components/user-own/user-own.component';
 import { RegisterComponent } from './components/_user-login/register/register.component';
@@ -42,7 +41,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     ProfileComponent,
     UserListComponent,
-    UserSingleComponent,
     UserListSingleComponent,
     UserOwnComponent,
     RegisterComponent,
@@ -65,7 +63,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserService,
     AuthService
   ],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
